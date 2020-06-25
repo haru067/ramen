@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
+import 'package:ramen/shop_menu/menu_list_item.dart';
 
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
@@ -119,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            MenuListItem(),
           ],
         ),
       ),
