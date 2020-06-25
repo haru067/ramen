@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: '麺屋はる'),
     );
   }
 }
@@ -121,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigation(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: TextResource.of(context).title,
