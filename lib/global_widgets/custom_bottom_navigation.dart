@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 
-class CustomBottomNavigation extends StatelessWidget {
+class CustomBottomNavigation extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _CustomBottomNavigationState();
+}
+
+class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -23,6 +36,8 @@ class CustomBottomNavigation extends StatelessWidget {
           title: Text('店舗'),
         ),
       ],
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
     );
   }
 }
