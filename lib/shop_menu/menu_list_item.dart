@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ramen/shop_menu/menu.dart';
 
 class MenuListItem extends StatelessWidget {
+  final Menu menu;
+  MenuListItem(this.menu);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -24,11 +28,11 @@ class MenuListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "醬油ラーメン",
+                    menu.title,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Text(
-                    "鶏と煮干しで出汁をとった、昔ながらのラーメンです。",
+                    menu.subTitle,
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ],
@@ -37,7 +41,7 @@ class MenuListItem extends StatelessWidget {
             Container(
                 margin: EdgeInsets.only(left: 16.0, right: 16.0),
                 child: Text(
-                  "700円",
+                  "${menu.price}円",
                   style: Theme.of(context).textTheme.headline6,
                 )),
           ],
@@ -46,3 +50,4 @@ class MenuListItem extends StatelessWidget {
     );
   }
 }
+
