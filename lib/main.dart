@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/shop_menu/menu.dart';
-import 'package:ramen/shop_menu/menu_detail.dart';
-import 'package:ramen/shop_menu/menu_list_item.dart';
-
+import 'package:ramen/shop_menu/widgets/menu_detail.dart';
+import 'package:ramen/shop_menu/widgets/menu_list_item.dart';
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
 
