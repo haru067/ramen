@@ -8,18 +8,33 @@ class NoticeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: _getListData(context));
+    return Container(
+      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: _getNoticeWidgets(context),
+      ),
+    );
   }
 
-  List<Widget> _getListData(BuildContext context) {
-    List<Widget> widgets = [Text("お知らせ", style: Theme.of(context).textTheme.headline6)];
-    for (int i = 0; i < 100; i++) {
-      widgets.add(Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Text("Row $i"),
-      ));
-    }
+  List<Widget> _getNoticeWidgets(BuildContext context) {
+    var header = Container(
+      margin: EdgeInsets.only(bottom: 16.0),
+        child: Text("お知らせ", style: Theme.of(context).textTheme.headline6)
+    );
+    List<Widget> widgets = [header];
+    list.forEach((notice) => widgets.add(_getNoticeWidget(context, notice)));
     return widgets;
+  }
+
+  Widget _getNoticeWidget(BuildContext context, Notice notice) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(notice.title, style: Theme.of(context).textTheme.subtitle1),
+        Text(notice.description, style: Theme.of(context).textTheme.bodyText2),
+      ],
+    );
   }
 }
 
