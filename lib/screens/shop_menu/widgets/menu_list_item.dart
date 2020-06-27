@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ramen/shop_menu/menu.dart';
+
+import '../menu.dart';
 
 class MenuListItem extends StatelessWidget {
   final Menu menu;

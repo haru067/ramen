@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
-import 'package:ramen/shop_menu/menu.dart';
-import 'package:ramen/shop_menu/widgets/menu_detail.dart';
-import 'package:ramen/shop_menu/widgets/menu_list_item.dart';
+import 'package:ramen/screens/home/notice.dart';
+import 'package:ramen/screens/home/widgets/notice_list.dart';
+import 'package:ramen/screens/shop_menu/menu.dart';
+import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
+import 'package:ramen/screens/shop_menu/widgets/menu_list_item.dart';
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
 
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
+  // This widget is the screens.home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
 
@@ -97,25 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
           children: <Widget>[
             Text(
               TextResource.of(context).greeting
@@ -127,9 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
             MenuListItem(Menu("醬油ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 700, "https://haru067.com/img/me.png")),
             MenuListItem(Menu("塩ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 800, "https://haru067.com/img/me.png")),
             MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900, "https://haru067.com/img/me.png")),
+            NoticeList([Notice("aaaa", "bbb", DateTime.now())]),
           ],
         ),
-      ),
       bottomNavigationBar: CustomBottomNavigation(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
