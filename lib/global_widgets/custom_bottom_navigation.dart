@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ramen/main_bloc.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
   @override
@@ -8,14 +10,9 @@ class CustomBottomNavigation extends StatefulWidget {
 class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final mainBloc = Provider.of<MainBloc>(context);
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
@@ -37,7 +34,12 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         ),
       ],
       currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
+      onTap: (index) {
+        setState(() {
+          _selectedIndex = index;
+          mainBloc.selectBottomTab.add(index);
+        });
+      },
     );
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
+import 'package:ramen/main_bloc.dart';
 import 'package:ramen/screens/home/notice.dart';
 import 'package:ramen/screens/home/widgets/notice_list.dart';
 import 'package:ramen/screens/shop_menu/menu.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_list_item.dart';
+import 'package:provider/provider.dart';
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
 
@@ -24,10 +26,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale('en'),
-        const Locale('ja')
-      ],
+      supportedLocales: [const Locale('en'), const Locale('ja')],
       title: 'test',
       theme: ThemeData(
         // This is the theme of your application.
@@ -45,8 +44,11 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: '麺屋はる'),
-      routes: <String, WidgetBuilder> {
+      home: Provider<MainBloc>(
+          create: (context) => MainBloc(),
+          dispose: (context, bloc) => bloc.dispose(),
+          child: MyHomePage(title: '麺屋はる')),
+      routes: <String, WidgetBuilder>{
         '/shop-menu': (BuildContext context) => MenuDetail(),
       },
     );
@@ -87,39 +89,32 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final mainBloc = Provider.of<MainBloc>(context);
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: ListView(
-          children: <Widget>[
-            Text(
-              TextResource.of(context).greeting
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            MenuListItem(Menu("醬油ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 700, "https://haru067.com/img/me.png")),
-            MenuListItem(Menu("塩ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 800, "https://haru067.com/img/me.png")),
-            MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900, "https://haru067.com/img/me.png")),
-            NoticeList([
-              Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
-              Notice("aaaa", "bbb", DateTime.now()),
-              Notice("aaaa", "bbb", DateTime.now()),
-              Notice("aaaa", "bbb", DateTime.now()),
-              Notice("aaaa", "bbb", DateTime.now()),
-            ]),
-          ],
-        ),
+      body: StreamBuilder(
+        initialData: 0,
+        stream: mainBloc.bottomTabIndex,
+        builder: (context, snapshot) {
+          var screen;
+          if (snapshot.data == 0) {
+            screen = buildHomeScreen();
+          } else if(snapshot.data == 1) {
+            screen = buildMenuScreen();
+          } else if(snapshot.data == 2){
+            screen = buildMenuScreen();
+          } else if(snapshot.data == 3){
+            screen = buildMenuScreen();
+          } else {
+            throw StateError("Invalid bottom tab index: ${snapshot.data}");
+          }
+          return ListView(children: screen);
+        },
+      ),
       bottomNavigationBar: CustomBottomNavigation(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
@@ -127,5 +122,52 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  List<Widget> buildHomeScreen() {
+    return [
+      Container(
+        height: 180,
+        color: Colors.blueGrey,
+        alignment: Alignment.center,
+        child: Text("TODO: replace this"),
+      ),
+      NoticeList([
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("aaaa", "bbb", DateTime.now()),
+        Notice("aaaa", "bbb", DateTime.now()),
+        Notice("aaaa", "bbb", DateTime.now()),
+        Notice("aaaa", "bbb", DateTime.now()),
+      ]),
+    ];
+  }
+
+  List<Widget> buildMenuScreen() {
+    return [
+      MenuListItem(Menu("醬油ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 700,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("塩ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 800,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
+          "https://haru067.com/img/me.png")),
+    ];
   }
 }
