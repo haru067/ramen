@@ -134,10 +134,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       NoticeList([
         Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
-        Notice("aaaa", "bbb", DateTime.now()),
-        Notice("aaaa", "bbb", DateTime.now()),
-        Notice("aaaa", "bbb", DateTime.now()),
-        Notice("aaaa", "bbb", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
+        Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
       ]),
     ];
   }

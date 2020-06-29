@@ -19,22 +19,29 @@ class NoticeList extends StatelessWidget {
 
   List<Widget> _getNoticeWidgets(BuildContext context) {
     var header = Container(
-      margin: EdgeInsets.only(bottom: 16.0),
-        child: Text("お知らせ", style: Theme.of(context).textTheme.headline6)
-    );
+        margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
+        child: Text("お知らせ", style: Theme.of(context).textTheme.headline6));
     List<Widget> widgets = [header];
     list.forEach((notice) => widgets.add(_getNoticeWidget(context, notice)));
     return widgets;
   }
 
   Widget _getNoticeWidget(BuildContext context, Notice notice) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(notice.title, style: Theme.of(context).textTheme.subtitle1),
-        Text(notice.description, style: Theme.of(context).textTheme.bodyText2),
-      ],
-    );
+    return Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Colors.black12),
+          ),
+        ),
+        padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(notice.title, style: Theme.of(context).textTheme.subtitle1),
+            Text(notice.description,
+                style: Theme.of(context).textTheme.bodyText2),
+          ],
+        ));
   }
 }
 
