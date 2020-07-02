@@ -104,15 +104,15 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.data == 0) {
             screen = buildHomeScreen();
           } else if(snapshot.data == 1) {
-            screen = buildMenuScreen();
+            screen = buildMenuScreen(context);
           } else if(snapshot.data == 2){
-            screen = buildMenuScreen();
+            screen = buildMenuScreen(context);
           } else if(snapshot.data == 3){
-            screen = buildMenuScreen();
+            screen = buildMenuScreen(context);
           } else {
             throw StateError("Invalid bottom tab index: ${snapshot.data}");
           }
-          return ListView(children: screen);
+          return screen;
         },
       ),
       bottomNavigationBar: CustomBottomNavigation(),
@@ -124,8 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<Widget> buildHomeScreen() {
-    return [
+  Widget buildHomeScreen() {
+    return ListView(children: [
       Container(
         height: 180,
         color: Colors.blueGrey,
@@ -144,35 +144,20 @@ class _MyHomePageState extends State<MyHomePage> {
         Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
         Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
       ]),
-    ];
+    ]);
   }
 
-  List<Widget> buildMenuScreen() {
-    return [
-      MenuListItem(Menu("醬油ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 700,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("塩ラーメン", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 800,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-      MenuListItem(Menu("つけめん", "鶏と煮干しで出汁をとった、昔ながらのラーメンです。", 900,
-          "https://haru067.com/img/me.png")),
-    ];
+Widget buildMenuScreen(BuildContext context) {
+    final mainBloc = Provider.of<MainBloc>(context);
+    return StreamBuilder<List<Menu>>(
+        initialData: List(),
+        stream: mainBloc.menus,
+        builder: (BuildContext context, AsyncSnapshot<List<Menu>> snapshot) {
+          if (snapshot.data == null) return Container();
+
+          List<Widget> menuItems = snapshot.data.map((menu) => MenuListItem(menu)).toList();
+          return ListView(children: menuItems);
+        }
+    );
   }
 }
