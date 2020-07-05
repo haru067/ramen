@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:ramen/repositories/static_data_repository.dart';
-import 'package:ramen/screens/shop_menu/menu.dart';
+import 'package:ramen/screens/shop_menu/entities/menu.dart';
 
 class MainBloc {
   final _staticDataRepository = StaticDataRepository();

@@ -4,10 +4,11 @@ import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/main_bloc.dart';
 import 'package:ramen/screens/home/notice.dart';
 import 'package:ramen/screens/home/widgets/notice_list.dart';
-import 'package:ramen/screens/shop_menu/menu.dart';
+import 'package:ramen/screens/shop_menu/entities/menu.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_list_item.dart';
 import 'package:provider/provider.dart';
+import 'package:ramen/screens/shop_menu/widgets/menu_screen.dart';
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
 
@@ -104,11 +105,11 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.data == 0) {
             screen = buildHomeScreen();
           } else if(snapshot.data == 1) {
-            screen = buildMenuScreen(context);
+            screen = MenuScreen();
           } else if(snapshot.data == 2){
-            screen = buildMenuScreen(context);
+            screen = MenuScreen();
           } else if(snapshot.data == 3){
-            screen = buildMenuScreen(context);
+            screen = MenuScreen();
           } else {
             throw StateError("Invalid bottom tab index: ${snapshot.data}");
           }
@@ -145,19 +146,5 @@ class _MyHomePageState extends State<MyHomePage> {
         Notice("臨時休業のお知らせ", "明日は休みです。", DateTime.now()),
       ]),
     ]);
-  }
-
-Widget buildMenuScreen(BuildContext context) {
-    final mainBloc = Provider.of<MainBloc>(context);
-    return StreamBuilder<List<Menu>>(
-        initialData: List(),
-        stream: mainBloc.menus,
-        builder: (BuildContext context, AsyncSnapshot<List<Menu>> snapshot) {
-          if (snapshot.data == null) return Container();
-
-          List<Widget> menuItems = snapshot.data.map((menu) => MenuListItem(menu)).toList();
-          return ListView(children: menuItems);
-        }
-    );
   }
 }
