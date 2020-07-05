@@ -91,37 +91,34 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final mainBloc = Provider.of<MainBloc>(context);
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: StreamBuilder(
+    return StreamBuilder(
         initialData: 0,
         stream: mainBloc.bottomTabIndex,
         builder: (context, snapshot) {
-          var screen;
+          Widget body;
+          Widget fab = Container();
           if (snapshot.data == 0) {
-            screen = buildHomeScreen();
-          } else if(snapshot.data == 1) {
-            screen = MenuScreen();
-          } else if(snapshot.data == 2){
-            screen = StampScreen();
-          } else if(snapshot.data == 3){
-            screen = AccessScreen();
+            body = buildHomeScreen();
+          } else if (snapshot.data == 1) {
+            body = MenuScreen();
+          } else if (snapshot.data == 2) {
+            body = StampScreen();
+            fab = FloatingActionButton(child: Icon(Icons.camera_alt));
+          } else if (snapshot.data == 3) {
+            body = AccessScreen();
           } else {
             throw StateError("Invalid bottom tab index: ${snapshot.data}");
           }
-          return screen;
-        },
-      ),
+          return _buildScaffold(body, fab, widget.title, mainBloc);
+        });
+  }
+
+  Widget _buildScaffold(Widget body, Widget fab, String title, MainBloc mainBloc) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: body,
       bottomNavigationBar: CustomBottomNavigation(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: TextResource.of(context).title,
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: fab,
     );
   }
 
