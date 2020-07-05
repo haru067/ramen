@@ -4,11 +4,11 @@ import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/main_bloc.dart';
 import 'package:ramen/screens/home/notice.dart';
 import 'package:ramen/screens/home/widgets/notice_list.dart';
-import 'package:ramen/screens/shop_menu/entities/menu.dart';
+import 'package:ramen/screens/shop_access/widgets/access_screen.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
-import 'package:ramen/screens/shop_menu/widgets/menu_list_item.dart';
 import 'package:provider/provider.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_screen.dart';
+import 'package:ramen/screens/stamp/widgets/stamp_screen.dart';
 import 'l10n/localization_delegate.dart';
 import 'l10n/text_resource.dart';
 
@@ -107,9 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
           } else if(snapshot.data == 1) {
             screen = MenuScreen();
           } else if(snapshot.data == 2){
-            screen = MenuScreen();
+            screen = StampScreen();
           } else if(snapshot.data == 3){
-            screen = MenuScreen();
+            screen = AccessScreen();
           } else {
             throw StateError("Invalid bottom tab index: ${snapshot.data}");
           }
