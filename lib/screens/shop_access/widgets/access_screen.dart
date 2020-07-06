@@ -6,42 +6,67 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class AccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MapSample();
+    return Stack(
+      children: <Widget>[
+        Map(),
+        _buildShopSummary(),
+      ],
+    );
+  }
+
+  Widget _buildShopSummary() {
+    Widget shopSummary = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text("adasfs"),
+        Text("adasfs"),
+        Text("adasfs"),
+        Text("adasfs"),
+      ],
+    );
+    return Container(
+        padding: const EdgeInsets.only(top: 0, bottom: 16, right: 24, left: 24),
+        alignment: Alignment.bottomCenter,
+        child: Container(
+            padding: const EdgeInsets.all(16),
+            // color: Colors.white70,
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.white70,
+                border: Border.all(
+                  color: Colors.black12,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(4)),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[shopSummary],
+            )));
   }
 }
 
-class MapSample extends StatefulWidget {
+class Map extends StatefulWidget {
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<Map> createState() => MapState();
 }
 
-class MapSampleState extends State<MapSample> {
+class MapState extends State<Map> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+  static final CameraPosition _pos = CameraPosition(
+    target: LatLng(34.7399064, 137.812359),
+    zoom: 17.5,
   );
-
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      mapType: MapType.normal,
+      initialCameraPosition: _pos,
+      zoomControlsEnabled: false,
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      },
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
