@@ -9,39 +9,43 @@ class AccessScreen extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Map(),
-        _buildShopSummary(),
+        _buildShopSummary(context),
       ],
     );
   }
 
-  Widget _buildShopSummary() {
+  Widget _buildShopSummary(BuildContext context) {
     Widget shopSummary = Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("adasfs"),
-        Text("adasfs"),
-        Text("adasfs"),
-        Text("adasfs"),
+        Text("麺屋はる", style: Theme.of(context).textTheme.subtitle1),
+        Text("東京都千代田区千代田１−１",  style: Theme.of(context).textTheme.caption),
+        Padding(padding: const EdgeInsets.all(8)),
+        Text("営業時間: 11:00 ~ 21:00",  style: Theme.of(context).textTheme.bodyText1),
+        Text("定休日: 日",  style: Theme.of(context).textTheme.bodyText1),
+        Padding(padding: const EdgeInsets.all(8)),
+        Row(
+          children: <Widget>[
+            Icon(Icons.share),
+            Padding(padding: const EdgeInsets.all(8)),
+            Icon(Icons.share),
+            Padding(padding: const EdgeInsets.all(8)),
+            Icon(Icons.share),
+          ],
+        )
       ],
     );
     return Container(
         padding: const EdgeInsets.only(top: 0, bottom: 16, right: 24, left: 24),
         alignment: Alignment.bottomCenter,
-        child: Container(
-            padding: const EdgeInsets.all(16),
-            // color: Colors.white70,
-            decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.white70,
-                border: Border.all(
-                  color: Colors.black12,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(4)),
-            child: Row(
+        child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+                child: Row(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[shopSummary],
-            )));
+            ))));
   }
 }
 
