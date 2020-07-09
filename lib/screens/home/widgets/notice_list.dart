@@ -54,10 +54,3 @@ class NoticeList extends StatelessWidget {
         ));
   }
 }
-
-class NoticeListItem extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Text("title");
-  }
-}

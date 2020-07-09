@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/main_bloc.dart';
 import 'package:ramen/screens/home/entities/notice.dart';
+import 'package:ramen/screens/home/widgets/banner_widget.dart';
 import 'package:ramen/screens/home/widgets/notice_list.dart';
 import 'package:ramen/screens/shop_access/widgets/access_screen.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
@@ -124,12 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildHomeScreen() {
     return ListView(children: [
-      Container(
-        height: 180,
-        color: Colors.blueGrey,
-        alignment: Alignment.center,
-        child: Text("TODO: replace this"),
-      ),
+      BannerWidget(),
       NoticeList(),
     ]);
   }
