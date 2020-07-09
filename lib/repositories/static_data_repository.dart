@@ -36,10 +36,10 @@ class StaticDataRepository {
         .transform(transformer);
   }
 
-  Stream<List<Banner>> getBanners() {
-    var transformer = StreamTransformer<QuerySnapshot, List<Banner>>.fromHandlers(
+  Stream<List<HomeBanner>> getBanners() {
+    var transformer = StreamTransformer<QuerySnapshot, List<HomeBanner>>.fromHandlers(
         handleData: (snapshot, sink) {
-          List<Banner> banners = snapshot.documents.map((doc) => Banner.fromDocument(doc)).toList();
+          List<HomeBanner> banners = snapshot.documents.map((doc) => HomeBanner.fromDocument(doc)).toList();
           sink.add(banners);
         }
     );

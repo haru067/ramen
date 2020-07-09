@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/main_bloc.dart';
-import 'package:ramen/screens/home/entities/notice.dart';
-import 'package:ramen/screens/home/widgets/banner_widget.dart';
-import 'package:ramen/screens/home/widgets/notice_list.dart';
+import 'package:ramen/screens/home/widgets/home_screen.dart';
 import 'package:ramen/screens/shop_access/widgets/access_screen.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
 import 'package:provider/provider.dart';
@@ -99,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Widget body;
           Widget fab = Container();
           if (snapshot.data == 0) {
-            body = buildHomeScreen();
+            body = HomeScreen();
           } else if (snapshot.data == 1) {
             body = MenuScreen();
           } else if (snapshot.data == 2) {
@@ -121,12 +119,5 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: CustomBottomNavigation(),
       floatingActionButton: fab,
     );
-  }
-
-  Widget buildHomeScreen() {
-    return ListView(children: [
-      BannerWidget(),
-      NoticeList(),
-    ]);
   }
 }

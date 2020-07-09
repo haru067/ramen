@@ -14,7 +14,7 @@ class MainBloc {
 
   Stream<List<Menu>> get menus => _staticDataRepository.getMenus();
   Stream<List<Notice>> get notices => _staticDataRepository.getNotices();
-  Stream<List<Banner>> get banners => _staticDataRepository.getBanners();
+  Stream<List<HomeBanner>> get banners => _staticDataRepository.getBanners();
 
   MainBloc();
 

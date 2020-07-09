@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Banner{
+class HomeBanner{
   String url;
   String imageUrl;
 
-  Banner(this.url, this.imageUrl);
+  HomeBanner(this.url, this.imageUrl);
 
-  Banner.fromDocument(DocumentSnapshot doc):
+  HomeBanner.fromDocument(DocumentSnapshot doc):
         url = doc.data["url"],
         imageUrl = doc.data["imageUrl"];
 }
