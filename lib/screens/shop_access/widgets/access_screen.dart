@@ -27,7 +27,7 @@ class AccessScreen extends StatelessWidget {
         Padding(padding: const EdgeInsets.all(8)),
         Row(
           children: <Widget>[
-            Icon(Icons.share),
+            Icon(Icons.map),
             Padding(padding: const EdgeInsets.all(8)),
             Icon(Icons.share),
             Padding(padding: const EdgeInsets.all(8)),
