@@ -4,7 +4,7 @@ import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/main_bloc.dart';
 import 'package:ramen/screens/home/widgets/home_screen.dart';
 import 'package:ramen/screens/shop_access/widgets/access_screen.dart';
-import 'package:ramen/screens/shop_menu/widgets/menu_detail.dart';
+import 'package:ramen/screens/shop_menu/widgets/menu_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:ramen/screens/shop_menu/widgets/menu_screen.dart';
 import 'package:ramen/screens/stamp/widgets/stamp_screen.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           dispose: (context, bloc) => bloc.dispose(),
           child: MyHomePage(title: '麺屋はる')),
       routes: <String, WidgetBuilder>{
-        '/shop-menu': (BuildContext context) => MenuDetail(),
+        '/shop-menu': (BuildContext context) => MenuDetailScreen(),
       },
     );
   }

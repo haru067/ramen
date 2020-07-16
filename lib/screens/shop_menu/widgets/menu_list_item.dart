@@ -4,12 +4,15 @@ import '../entities/menu.dart';
 
 class MenuListItem extends StatelessWidget {
   final Menu menu;
+
   MenuListItem(this.menu);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () { Navigator.of(context).pushNamed('/shop-menu'); },
+      onTap: () {
+        Navigator.of(context).pushNamed('/shop-menu', arguments: menu);
+      },
       child: Container(
         height: 88,
         child: Row(
@@ -51,4 +54,3 @@ class MenuListItem extends StatelessWidget {
     );
   }
 }
-
