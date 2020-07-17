@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ramen/global_widgets/custom_bottom_navigation.dart';
 import 'package:ramen/main_bloc.dart';
@@ -19,6 +20,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent));
     return MaterialApp(
       localizationsDelegates: [
         const LocalizationDelegate(),
@@ -29,19 +35,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [const Locale('en'), const Locale('ja')],
       title: 'test',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Provider<MainBloc>(
@@ -112,9 +106,19 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  Widget _buildScaffold(Widget body, Widget fab, String title, MainBloc mainBloc) {
+  Widget _buildScaffold(
+      Widget body, Widget fab, String title, MainBloc mainBloc) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black87),
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        title: Text(title,
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                .copyWith(color: Colors.black87)),
+      ),
       body: body,
       bottomNavigationBar: CustomBottomNavigation(),
       floatingActionButton: fab,

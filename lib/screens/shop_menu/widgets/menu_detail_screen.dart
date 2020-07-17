@@ -7,7 +7,14 @@ class MenuDetailScreen extends StatelessWidget {
     final Menu menu = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text(menu.title),
+          iconTheme: IconThemeData(color: Colors.black87),
+          backgroundColor: Colors.white,
+          brightness: Brightness.light,
+          title: Text(menu.title,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(color: Colors.black87)),
         ),
         body: _buildBody(context, menu));
   }
@@ -24,8 +31,7 @@ class MenuDetailScreen extends StatelessWidget {
               _buildTitleLine(context, menu),
               Padding(
                 padding: EdgeInsets.only(top: 2, bottom: 0),
-                child:
-                _buildRating(),
+                child: _buildRating(),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 16, bottom: 16),
