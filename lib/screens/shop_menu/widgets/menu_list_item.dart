@@ -20,7 +20,7 @@ class MenuListItem extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(right: 20.0),
               child: Image.network(
-                "https://haru067.com/img/me.png",
+                menu.imageUrl,
                 width: 100,
                 height: 56,
                 fit: BoxFit.cover,

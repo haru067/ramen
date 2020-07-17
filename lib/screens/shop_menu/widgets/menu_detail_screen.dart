@@ -21,14 +21,18 @@ class MenuDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(menu.title, style: Theme.of(context).textTheme.headline6),
+              _buildTitleLine(context, menu),
               Padding(
-                padding: EdgeInsets.only(top: 8, bottom: 8),
+                padding: EdgeInsets.only(top: 2, bottom: 0),
+                child:
+                _buildRating(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16, bottom: 16),
                 child: Text("${menu.price}円",
                     style: Theme.of(context).textTheme.subtitle1),
               ),
               Text(menu.subTitle, style: Theme.of(context).textTheme.bodyText1),
-              IconButton(icon: Icon(Icons.favorite_border), onPressed: null)
             ],
           ),
         )
@@ -48,5 +52,27 @@ class MenuDetailScreen extends StatelessWidget {
           constraints: BoxConstraints.expand(),
           child: Image.network("${menu.imageUrl}", fit: BoxFit.cover)),
     );
+  }
+
+  Widget _buildTitleLine(BuildContext context, Menu menu) {
+    return Row(children: [
+      Expanded(
+          child:
+              Text(menu.title, style: Theme.of(context).textTheme.headline5)),
+      Container(
+        margin: EdgeInsets.only(left: 16.0, right: 16.0),
+      ),
+    ]);
+  }
+
+  Widget _buildRating() {
+    return Row(children: [
+      Icon(Icons.star, color: Colors.orange, size: 16),
+      Icon(Icons.star, color: Colors.orange, size: 16),
+      Icon(Icons.star, color: Colors.orange, size: 16),
+      Icon(Icons.star_border, color: Colors.orange, size: 16),
+      Icon(Icons.star_border, color: Colors.orange, size: 16),
+      Padding(padding: EdgeInsets.only(left: 8), child: Text("3.5 (431)")),
+    ]);
   }
 }
