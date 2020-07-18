@@ -24,7 +24,12 @@ class NoticeList extends StatelessWidget {
   List<Widget> _getNoticeWidgets(
       BuildContext context, AsyncSnapshot<List<Notice>> snapshot) {
     var header = Container(
-        margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Colors.black12),
+          ),
+        ),
+        padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
         child: Text("お知らせ", style: Theme.of(context).textTheme.headline6));
     List<Widget> widgets = [header];
     if (snapshot.data != null) {
