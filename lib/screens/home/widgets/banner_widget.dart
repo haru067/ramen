@@ -10,26 +10,24 @@ class BannerWidget extends StatelessWidget {
     return StreamBuilder<List<HomeBanner>>(
       initialData: List(),
       stream: mainBloc.banners,
-      builder: (BuildContext context, AsyncSnapshot<List<HomeBanner>> snapshot) {
-        HomeBanner banner = snapshot.data.length > 0 ? snapshot.data.first : null;
-        return Container(
-          height: 180,
-          color: Colors.blueGrey,
-          alignment: Alignment.center,
-          child: _buildBanner(context, banner)
-        );
+      builder:
+          (BuildContext context, AsyncSnapshot<List<HomeBanner>> snapshot) {
+        HomeBanner banner =
+            snapshot.data.length > 0 ? snapshot.data.first : null;
+        return AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Container(
+                alignment: Alignment.center,
+                child: _buildBanner(context, banner)));
       },
     );
   }
-  
+
   Widget _buildBanner(BuildContext context, HomeBanner banner) {
     if (banner == null) return Container();
 
     return Container(
-      height: 180,
-      color: Colors.blueGrey,
-      constraints: BoxConstraints.expand(),
-      child: Image.network("${banner.imageUrl}", fit: BoxFit.cover)
-    );
+        constraints: BoxConstraints.expand(),
+        child: Image.network("${banner.imageUrl}", fit: BoxFit.cover));
   }
 }

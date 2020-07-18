@@ -49,7 +49,9 @@ class MenuDetailScreen extends StatelessWidget {
   Widget _buildHeader(Menu menu) {
     if (menu == null) return Container();
 
-    return Container(
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+        child: Container(
       height: 320,
       color: Colors.blueGrey,
       alignment: Alignment.center,
@@ -57,7 +59,7 @@ class MenuDetailScreen extends StatelessWidget {
           color: Colors.blueGrey,
           constraints: BoxConstraints.expand(),
           child: Image.network("${menu.imageUrl}", fit: BoxFit.cover)),
-    );
+    ));
   }
 
   Widget _buildTitleLine(BuildContext context, Menu menu) {
