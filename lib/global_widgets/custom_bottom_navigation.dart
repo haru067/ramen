@@ -21,15 +21,15 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
           title: Text('ホーム'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.business),
+          icon: Icon(Icons.restaurant_menu),
           title: Text('メニュー'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.school),
+          icon: Icon(Icons.flag),
           title: Text('スタンプ'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.access_alarms),
+          icon: Icon(Icons.store),
           title: Text('店舗'),
         ),
       ],
