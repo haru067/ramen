@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccessScreen extends StatelessWidget {
   @override
@@ -12,6 +13,16 @@ class AccessScreen extends StatelessWidget {
         _buildShopSummary(context),
       ],
     );
+  }
+
+  _launchURL() async {
+    // const url = 'https://twitter.com/haru067';
+    const url = 'https://www.google.com/maps/@?api=1&map_action=map';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Widget _buildShopSummary(BuildContext context) {
@@ -27,11 +38,21 @@ class AccessScreen extends StatelessWidget {
         Padding(padding: const EdgeInsets.all(8)),
         Row(
           children: <Widget>[
-            Icon(Icons.map),
+            RaisedButton.icon(
+                icon: Icon(Icons.map),
+                label: Text("地図を開く"),
+              color: Colors.blueAccent,
+              textColor: Colors.white,
+              onPressed: _launchURL,
+            ),
             Padding(padding: const EdgeInsets.all(8)),
-            Icon(Icons.share),
-            Padding(padding: const EdgeInsets.all(8)),
-            Icon(Icons.share),
+            RaisedButton.icon(
+              icon: Icon(Icons.directions_bike),
+              label: Text("Twitter"),
+              color: Colors.blueAccent,
+              textColor: Colors.white,
+              onPressed: _launchURL,
+            ),
           ],
         )
       ],
