@@ -11,22 +11,15 @@ class AccessScreen extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Map(),
-        _buildShopSummary(context),
+        ShopSummary(),
       ],
     );
   }
+}
 
-  _launchURL() async {
-    // const url = 'https://twitter.com/haru067';
-    const url = 'https://www.google.com/maps/@?api=1&map_action=map';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  Widget _buildShopSummary(BuildContext context) {
+class ShopSummary extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     Widget shopSummary = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,31 +31,11 @@ class AccessScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1),
         Text("定休日: 日", style: Theme.of(context).textTheme.bodyText1),
         Padding(padding: const EdgeInsets.all(4)),
-        Row(
-          children: <Widget>[
-            OutlineButton.icon(
-              icon: Icon(Icons.map, color: Colors.green.shade600,),
-              label: Text("地図を開く"),
-              onPressed: _launchURL,
-            ),
-            Padding(padding: const EdgeInsets.all(8)),
-            OutlineButton.icon(
-              icon: SvgPicture.asset(
-                'assets/twitter.svg',
-                width: 28,
-                height: 28,
-              ),
-              label: Text("Twitter"),
-              color: Colors.black12,
-              textColor: Colors.black87,
-              onPressed: _launchURL,
-            ),
-          ],
-        )
+        _buildButtons()
       ],
     );
     return Container(
-        padding: const EdgeInsets.only(top: 0, bottom: 16, right: 24, left: 24),
+        padding: const EdgeInsets.only(top: 16, bottom: 16, right: 24, left: 24),
         alignment: Alignment.bottomCenter,
         child: Card(
             child: Padding(
@@ -71,6 +44,49 @@ class AccessScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[shopSummary],
                 ))));
+  }
+
+  Widget _buildButtons() {
+    return Row(
+      children: <Widget>[
+        OutlineButton.icon(
+          icon: Icon(
+            Icons.map,
+            color: Colors.green.shade600,
+          ),
+          label: Text("地図を開く"),
+          onPressed: _launchMap,
+        ),
+        Padding(padding: const EdgeInsets.all(8)),
+        OutlineButton.icon(
+          icon: SvgPicture.asset(
+            'assets/twitter.svg',
+            width: 28,
+            height: 28,
+          ),
+          label: Text("Twitter"),
+          color: Colors.black12,
+          textColor: Colors.black87,
+          onPressed: _launchTwitter,
+        ),
+      ],
+    );
+  }
+
+  _launchMap() {
+    _launchUrl('https://www.google.com/maps/@?api=1&map_action=map');
+  }
+
+  _launchTwitter() {
+    _launchUrl('https://twitter.com/haru067');
+  }
+
+  _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 
