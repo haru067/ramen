@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,26 +32,29 @@ class AccessScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text("麺屋はる", style: Theme.of(context).textTheme.subtitle1),
-        Text("東京都千代田区千代田１−１",  style: Theme.of(context).textTheme.caption),
+        Text("東京都千代田区千代田１−１", style: Theme.of(context).textTheme.caption),
         Padding(padding: const EdgeInsets.all(8)),
-        Text("営業時間: 11:00 ~ 21:00",  style: Theme.of(context).textTheme.bodyText1),
-        Text("定休日: 日",  style: Theme.of(context).textTheme.bodyText1),
-        Padding(padding: const EdgeInsets.all(8)),
+        Text("営業時間: 11:00 ~ 21:00",
+            style: Theme.of(context).textTheme.bodyText1),
+        Text("定休日: 日", style: Theme.of(context).textTheme.bodyText1),
+        Padding(padding: const EdgeInsets.all(4)),
         Row(
           children: <Widget>[
-            RaisedButton.icon(
-                icon: Icon(Icons.map),
-                label: Text("地図を開く"),
-              color: Colors.blueAccent,
-              textColor: Colors.white,
+            OutlineButton.icon(
+              icon: Icon(Icons.map, color: Colors.green.shade600,),
+              label: Text("地図を開く"),
               onPressed: _launchURL,
             ),
             Padding(padding: const EdgeInsets.all(8)),
-            RaisedButton.icon(
-              icon: Icon(Icons.directions_bike),
+            OutlineButton.icon(
+              icon: SvgPicture.asset(
+                'assets/twitter.svg',
+                width: 28,
+                height: 28,
+              ),
               label: Text("Twitter"),
-              color: Colors.blueAccent,
-              textColor: Colors.white,
+              color: Colors.black12,
+              textColor: Colors.black87,
               onPressed: _launchURL,
             ),
           ],
@@ -62,11 +66,11 @@ class AccessScreen extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: Card(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[shopSummary],
-            ))));
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[shopSummary],
+                ))));
   }
 }
 
