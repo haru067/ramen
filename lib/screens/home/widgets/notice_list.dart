@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:ramen/main_bloc.dart';
 import 'package:ramen/screens/home/entities/notice.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NoticeList extends StatelessWidget {
   @override
@@ -55,7 +57,7 @@ class NoticeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {},
+        onTap: _launchUrl,
         child: Container(
             child: Container(
                 margin: EdgeInsets.only(left: 16.0, right: 16.0),
@@ -76,15 +78,40 @@ class NoticeWidget extends StatelessWidget {
             size: 24,
             color: Colors.blue,
           )),
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-        Container(height: 14),
-        Text(notice.title, style: Theme.of(context).textTheme.subtitle1),
-        Text(notice.createdAt.toLocal().toString(),
-            style: Theme.of(context).textTheme.subtitle1),
-        Container(height: 4),
-        Text(notice.description, style: Theme.of(context).textTheme.bodyText1),
-        Container(height: 16),
-      ]),
+      Expanded(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+            Container(height: 14),
+            _buildTitleLine(context),
+            Container(height: 4),
+            Text(notice.description,
+                style: Theme.of(context).textTheme.bodyText1),
+            Container(height: 16),
+          ])),
     ]);
+  }
+
+  Widget _buildTitleLine(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(notice.title, style: Theme.of(context).textTheme.subtitle1),
+          Container(
+            margin: EdgeInsets.only(left: 4, right: 8),
+            child: Text(DateFormat("yyyy/MM/dd hh:mm").format(notice.createdAt),
+                style: Theme.of(context).textTheme.caption),
+          )
+        ]);
+  }
+
+  _launchUrl() async {
+    final String url = notice.url;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
