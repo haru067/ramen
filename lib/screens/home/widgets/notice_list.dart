@@ -60,6 +60,7 @@ class NoticeList extends StatelessWidget {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
           Container(height: 14),
           Text(notice.title, style: Theme.of(context).textTheme.subtitle1),
+          Text(notice.createdAt.toLocal().toString(), style: Theme.of(context).textTheme.subtitle1),
           Container(height: 4),
           Text(notice.description,
               style: Theme.of(context).textTheme.bodyText1),
