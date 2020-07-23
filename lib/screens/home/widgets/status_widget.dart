@@ -8,8 +8,8 @@ class StatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      color: Colors.green.shade500,
-      padding: EdgeInsets.only(top: 8, bottom: 8),
+      color: Colors.green.shade500.withOpacity(0.87),
+      padding: EdgeInsets.only(top: 4, bottom: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [

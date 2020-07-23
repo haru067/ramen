@@ -7,8 +7,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
-      BannerWidget(),
-      StatusWidget(),
+      Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        BannerWidget(),
+        StatusWidget(),
+      ]),
       NoticeList(),
     ]);
   }
