@@ -30,15 +30,22 @@ class MenuDetailScreen extends StatelessWidget {
             children: <Widget>[
               _buildTitleLine(context, menu),
               Padding(
-                padding: EdgeInsets.only(top: 2, bottom: 0),
+                padding: EdgeInsets.only(top: 2, bottom: 16),
                 child: _buildRating(),
               ),
+              /*
               Padding(
                 padding: EdgeInsets.only(top: 16, bottom: 16),
                 child: Text("${menu.price}円",
                     style: Theme.of(context).textTheme.subtitle1),
               ),
+               */
               Text(menu.subTitle, style: Theme.of(context).textTheme.bodyText1),
+              Padding(padding: const EdgeInsets.all(8)),
+              OutlineButton.icon(
+                icon: Icon(Icons.edit),
+                label: Text("レビューを書く"),
+              ),
             ],
           ),
         )
@@ -69,6 +76,8 @@ class MenuDetailScreen extends StatelessWidget {
               Text(menu.title, style: Theme.of(context).textTheme.headline5)),
       Container(
         margin: EdgeInsets.only(left: 16.0, right: 16.0),
+        child: Text("${menu.price}円",
+            style: Theme.of(context).textTheme.headline5),
       ),
     ]);
   }

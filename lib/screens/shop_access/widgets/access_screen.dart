@@ -65,8 +65,6 @@ class ShopSummary extends StatelessWidget {
             height: 28,
           ),
           label: Text("Twitter"),
-          color: Colors.black12,
-          textColor: Colors.black87,
           onPressed: _launchTwitter,
         ),
       ],
